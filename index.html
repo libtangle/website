@@ -7,18 +7,18 @@
   <!-- COMMON TAGS -->
   <title>QCGPU - Hardware Accelerated Quantum Computer Simulation</title>
   <!-- Search Engine -->
-  <meta name="description" content="A software library for high performance and hardware accelerated simulation of Quantum Computers and Algorithms. Written with Rust and OpenCL">
+  <meta name="description" content="A software library for high performance and hardware accelerated simulation of Quantum Computers and Algorithms. Written with Python and OpenCL">
   <!-- Schema.org for Google -->
   <meta itemprop="name" content="QCGPU - Hardware Accelerated Quantum Computer Simulation">
-  <meta itemprop="description" content="A software library for high performance and hardware accelerated simulation of Quantum Computers and Algorithms. Written with Rust and OpenCL">
+  <meta itemprop="description" content="A software library for high performance and hardware accelerated simulation of Quantum Computers and Algorithms. Written with Python and OpenCL">
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="QCGPU - Hardware Accelerated Quantum Computer Simulation">
-  <meta name="twitter:description" content="A software library for high performance and hardware accelerated simulation of Quantum Computers and Algorithms. Written with Rust and OpenCL">
+  <meta name="twitter:description" content="A software library for high performance and hardware accelerated simulation of Quantum Computers and Algorithms. Written with Python and OpenCL">
   <meta name="twitter:creator" content="@adamisntdead">
   <!-- Open Graph general (Facebook, Pinterest & Google+) -->
   <meta name="og:title" content="QCGPU - Hardware Accelerated Quantum Computer Simulation">
-  <meta name="og:description" content="A software library for high performance and hardware accelerated simulation of Quantum Computers and Algorithms. Written with Rust and OpenCL">
+  <meta name="og:description" content="A software library for high performance and hardware accelerated simulation of Quantum Computers and Algorithms. Written with Python and OpenCL">
   <meta name="og:url" content="https://qcgpu.github.io">
   <meta name="og:site_name" content="QCGPU">
   <meta name="og:locale" content="en_US">
@@ -61,10 +61,9 @@
             <img class="logo" src="/images/Logo.svg" alt="QCGPU Logo">
           </div>
           <div class="small-12 large-10 nav">
-            <a href="https://qcgpu.github.io/qcgpu-rust/doc/qcgpu/index.html">Documentation</a>
-            <a href="https://github.com/qcgpu/qcgpu-rust">Install</a>
-            <a href="https://arxiv.org/abs/1805.00988">White Paper</a>
-            <a href="https://qcgpu.github.io/qcgpu-rust/book">User Guide</a>
+            <a href="https://qcgpu.github.io/qcgpu/">Documentation</a>
+            <a href="https://github.com/qcgpu/qcgpu">Install</a>
+            <a href="https://arxiv.org/abs/1805.00988">Research Paper</a>
           </div>
         </div>
 
@@ -72,16 +71,16 @@
           <div class="medium-7 small-12">
             <p class="pitch">
               <b>QCGPU</b> is a high performance, hardware accelerated quantum computer simulator written with
-              <a href="https://rust-lang.org">Rust</a> and
+              <a href="https://www.python.org/">Python</a> and
               <a href="https://www.khronos.org/opencl/">OpenCL</a>.</p>
           </div>
           <div class="medium-1"></div>
           <div class="medium-4 small-12">
-            <a href="https://github.com/qcgpu/qcgpu-rust" class="button medium expanded">
+            <a href="https://github.com/qcgpu/qcgpu" class="button medium expanded">
               <i class="fab fa-github"></i> Get Started Now
             </a>
-            <a href="https://qcgpu.github.io/qcgpu-rust/book" class="button medium expanded">
-              Read The User Guide
+            <a href="https://arxiv.org/abs/1805.00988" class="button medium expanded">
+              Read The Research Paper
             </a>
           </div>
         </div>
@@ -90,10 +89,10 @@
             <ul>
               <div class="grid-x grid-padding-x">
                 <div class="medium-11 small-6">
-                  <li>Simulation of arbitrary quantum algorithms</li>
+                  <li>Simulation of arbitrary quantum circuits</li>
                   <li>Optional simulation of decoherence</li>
                   <li>Optimized for maximally entangled states</li>
-                  <li>Accelerated with GPUs, FPGAs and other OpenCL devices</li>
+                  <li>Runs cross platform, on GPUs, CPUs and other OpenCL devices </li>
                 </div>
                 <div class="medium-2"></div>
                 <div class="medium-11 small-6">
@@ -106,23 +105,27 @@
           </div>
           <div class="medium-1"></div>
           <div class="medium-8 small-12">
-            <pre><code class="html">extern crate qcgpu;
+            <pre><code class="python">###########################################
+# Bernstein-Vazirani Algorithm
+###########################################
 
-use qcgpu::State;
+import qcgpu
 
-fn main() {
-    // Create a 2 qubit register on the OpenCL Device #1
-    let mut state = State::new(2, 1);
+a = 101 # The hidden integer, bitstring is 1100101
 
-    // Apply a  Hadamard Gate to the 1st qubit
-    state.h(0); // Zero Indexed
+register = qcgpu.State(16) # Create a new quantum register
 
-    // Apply a CNOT gate, with the control as the 1st qubit, and target as the 2nd
-    state.cx(0, 1);
+register.apply_all(qcgpu.gate.h()) # Apply a hadamard gate to each qubit
 
-    // Measure 1000 times and print the results
-    println!("Measured: {:?}", state.measure_many(1000));
-}</code></pre>
+# Apply the inner products oracle
+for i in range(16):
+    if a & (1 << i) != 0:
+        register.z(i)
+
+register.apply_all(qcgpu.gate.h()) # Apply a hadamard gate to each qubit
+
+register.measure(samples=1000) # Measure the register (sample 1000 times)
+</code></pre>
           </div>
         </div>
       </div>
