@@ -1,6 +1,4 @@
-# The Website For QCGPU
+# libtangle.com
 
-> [Check It Out](https://qcgpu.github.io)
+> [Check It Out](https://libtangle.com)
 
-The design takes a lot of clues from the [Rust Language Website](https://www.rust-lang.org/en-US/), 
-although that is built on bootstrap, this website is built on Foundation.
